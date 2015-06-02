@@ -19,13 +19,17 @@ sudo yunohost app initdb $app -p $db_pwd
 sudo yunohost app setting $app mysqlpwd -v $db_pwd
 # sudo yunohost app setting $app adminusername -v $admin
 
+# Add apt-transport-https before adding gogs repor
+sudo apt-get update
+sudo apt-get -y install apt-transport-https
+
 # Add repository
 sudo wget -qO - https://deb.packager.io/key | sudo apt-key add -
 sudo echo "deb https://deb.packager.io/gh/pkgr/gogs wheezy pkgr" | sudo tee /etc/apt/sources.list.d/gogs.list
 
 # install gogs
 sudo apt-get update
-sudo apt-get -y install gogs apt-transport-https
+sudo apt-get -y install gogs
 
 # repository path
 repo_path=/home/yunohost.app/$app
